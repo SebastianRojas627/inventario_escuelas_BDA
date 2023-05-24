@@ -1,8 +1,8 @@
 version: "3.5"
 services:
-  database_master:
+  masterdb:
     image: mysql:8.0.30
-    container_name: "database_master"
+    container_name: "masterdb"
     restart: unless-stopped
     ports:
       - 3306:3306
@@ -17,12 +17,12 @@ services:
       - MYSQL_PASSWORD=password
     networks:
       - mynetwork
-  database_slave:
+  slavedb1:
     image: mysql:8.0.30
-    container_name: "database_slave"
+    container_name: "slavedb1"
     restart: unless-stopped
     depends_on:
-      - database_master
+      - masterdb
     ports:
       - 3307:3306
     volumes:
