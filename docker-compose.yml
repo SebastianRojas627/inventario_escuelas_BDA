@@ -7,7 +7,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./confs/master.sql:docker-entrypoint-initdb.d/master.sql
+      - ./confs/master.sql:/docker-entrypoint-initdb.d/master.sql
       - mysqldata_master:/var/lib/mysql
       - ./master.cnf:/etc/my.cnf
     environment:
@@ -26,7 +26,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./confs/slave.sql:docker-entrypoint-initdb.d/slave.sql
+      - ./confs/slave.sql:/docker-entrypoint-initdb.d/slave.sql
       - mysqldata_slave:/var/lib/mysql
       - ./slave.cnf:/etc/my.cnf
     environment:
