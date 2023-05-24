@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   masterdb:
-    image: mysql:8.0.30
+    image: mysql:debian
     container_name: "masterdb"
     restart: unless-stopped
     ports:
@@ -16,9 +16,9 @@ services:
       - MYSQL_DATABASE=inventario_escuelas
       - MYSQL_PASSWORD=password
     networks:
-      - mynetwork
+      - dbnetwork
   slavedb1:
-    image: mysql:8.0.30
+    image: mysql:debian
     container_name: "slavedb1"
     restart: unless-stopped
     depends_on:
@@ -35,9 +35,9 @@ services:
       - MYSQL_DATABASE=inventario_escuelas
       - MYSQL_PASSWORD=password
     networks:
-      - mynetwork
+      - dbnetwork
 networks:
-  mynetwork:
+  dbnetwork:
 volumes:
   mysqldata_master:
   mysqldata_slave:
