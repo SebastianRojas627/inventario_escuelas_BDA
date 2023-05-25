@@ -60,7 +60,7 @@ VALUES (1, 'Proveedor 1', 'Dirección 1'),
 CREATE TABLE Unidades_Educativas (
   ID_Unidad INT PRIMARY KEY,
   Nombre VARCHAR(255),
-  Direccion VARCHAR(255)
+  Direccion VARCHAR(255),
   ID_Tipo INT,
   FOREIGN KEY (ID_Tipo) REFERENCES Tipos_Unidades(ID_Tipo)
 );
