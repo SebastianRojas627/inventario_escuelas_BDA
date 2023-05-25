@@ -18,6 +18,7 @@ services:
       - MYSQL_PASSWORD=password
     networks:
       - dbnetwork
+
   slavedb1:
     image: mysql:debian
     container_name: "slavedb1"
@@ -38,8 +39,32 @@ services:
       - MYSQL_PASSWORD=password
     networks:
       - dbnetwork
+
+    slavedb2:
+      image: mysql:debian
+      container_name: "slavedb2"
+      restart: unless-stopped
+      depends_on:
+        - masterdb
+      ports:
+        - 3308:3306
+      volumes:
+        - mysqldata_slave2:/var/lib/mysql
+        - ./slave2.cnf:/etc/my.cnf
+        - ./confs/init.sql:/docker-entrypoint-initdb.d/init.sql
+        - ./confs/slave.sql:/docker-entrypoint-initdb.d/slave.sql
+      environment:
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_USER=mysql_user
+        - MYSQL_DATABASE=inventario_escuelas
+        - MYSQL_PASSWORD=password
+      networks:
+        - dbnetwork
+
 networks:
   dbnetwork:
+
 volumes:
   mysqldata_master:
   mysqldata_slave:
+  mysqldata_slave2:

@@ -1,113 +1,129 @@
 USE inventario_escuelas;
-
--- Create the Region table
-CREATE TABLE Region (
-  region_id INT PRIMARY KEY,
-  region_name VARCHAR(100),
-  description VARCHAR(255)
+-- Creación de la tabla Unidades_Educativas
+CREATE TABLE Unidades_Educativas (
+  ID_Unidad INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Direccion VARCHAR(255)
 );
 
--- Insert a random record into the Region table
-INSERT INTO Region (region_id, region_name, description)
-VALUES (1, 'Example Region', 'This is an example region.');
+-- Inserción de datos aleatorios en la tabla Unidades_Educativas
+INSERT INTO Unidades_Educativas (ID_Unidad, Nombre, Direccion)
+VALUES (1, 'Unidad Educativa A', 'Dirección A'),
+       (2, 'Unidad Educativa B', 'Dirección B'),
+       (3, 'Unidad Educativa C', 'Dirección C');
 
--- Create the EducationalCenter table
-CREATE TABLE EducationalCenter (
-  center_id INT PRIMARY KEY,
-  center_name VARCHAR(100),
-  address VARCHAR(255),
-  contact_information VARCHAR(255),
-  region_id INT,
-  latitude DECIMAL(9, 6),
-  longitude DECIMAL(9, 6),
-  FOREIGN KEY (region_id) REFERENCES Region(region_id)
+-- Creación de la tabla Coordenadas_GPS
+CREATE TABLE Coordenadas_GPS (
+  ID_Coordenadas INT PRIMARY KEY,
+  ID_Unidad INT,
+  Latitud DECIMAL(9,6),
+  Longitud DECIMAL(9,6),
+  FOREIGN KEY (ID_Unidad) REFERENCES Unidades_Educativas(ID_Unidad)
 );
 
--- Insert a random record into the EducationalCenter table
-INSERT INTO EducationalCenter (center_id, center_name, address, contact_information, region_id, latitude, longitude)
-VALUES (1, 'Example Center', '123 Main St', 'example@example.com', 1, 40.7128, -74.0060);
+-- Inserción de datos aleatorios en la tabla Coordenadas_GPS
+INSERT INTO Coordenadas_GPS (ID_Coordenadas, ID_Unidad, Latitud, Longitud)
+VALUES (1, 1, 12.345678, -45.678901),
+       (2, 2, 23.456789, -56.789012),
+       (3, 3, 34.567890, -67.890123);
 
--- Create the InventoryItem table
-CREATE TABLE InventoryItem (
-  item_id INT PRIMARY KEY,
-  item_name VARCHAR(100),
-  description VARCHAR(255),
-  quantity INT,
-  center_id INT,
-  FOREIGN KEY (center_id) REFERENCES EducationalCenter(center_id)
+-- Creación de la tabla Tipos_Unidades
+CREATE TABLE Tipos_Unidades (
+  ID_Tipo INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Descripcion VARCHAR(255)
 );
 
--- Insert a random record into the InventoryItem table
-INSERT INTO InventoryItem (item_id, item_name, description, quantity, center_id)
-VALUES (1, 'Example Item', 'This is an example item.', 10, 1);
+-- Inserción de datos aleatorios en la tabla Tipos_Unidades
+INSERT INTO Tipos_Unidades (ID_Tipo, Nombre, Descripcion)
+VALUES (1, 'Tipo 1', 'Descripción 1'),
+       (2, 'Tipo 2', 'Descripción 2'),
+       (3, 'Tipo 3', 'Descripción 3');
 
--- Create the ItemCategory table
-CREATE TABLE ItemCategory (
-  category_id INT PRIMARY KEY,
-  category_name VARCHAR(100)
+-- Creación de la tabla Provincias
+CREATE TABLE Provincias (
+  ID_Provincia INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Descripcion VARCHAR(255)
 );
 
--- Insert a random record into the ItemCategory table
-INSERT INTO ItemCategory (category_id, category_name)
-VALUES (1, 'Example Category');
+-- Inserción de datos aleatorios en la tabla Provincias
+INSERT INTO Provincias (ID_Provincia, Nombre, Descripcion)
+VALUES (1, 'Provincia 1', 'Descripción 1'),
+       (2, 'Provincia 2', 'Descripción 2'),
+       (3, 'Provincia 3', 'Descripción 3');
 
--- Create the ItemSupplier table
-CREATE TABLE ItemSupplier (
-  supplier_id INT PRIMARY KEY,
-  supplier_name VARCHAR(100),
-  contact_information VARCHAR(255)
+-- Creación de la tabla Localidades
+CREATE TABLE Localidades (
+  ID_Localidad INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Descripcion VARCHAR(255),
+  ID_Provincia INT,
+  FOREIGN KEY (ID_Provincia) REFERENCES Provincias(ID_Provincia)
 );
 
--- Insert a random record into the ItemSupplier table
-INSERT INTO ItemSupplier (supplier_id, supplier_name, contact_information)
-VALUES (1, 'Example Supplier', 'supplier@example.com');
+-- Inserción de datos aleatorios en la tabla Localidades
+INSERT INTO Localidades (ID_Localidad, Nombre, Descripcion, ID_Provincia)
+VALUES (1, 'Localidad 1', 'Descripción 1', 1),
+       (2, 'Localidad 2', 'Descripción 2', 2),
+       (3, 'Localidad 3', 'Descripción 3', 3);
 
--- Create the SupplierItem table
-CREATE TABLE SupplierItem (
-  supplier_id INT,
-  item_id INT,
-  price DECIMAL(10, 2),
-  quantity_available INT,
-  FOREIGN KEY (supplier_id) REFERENCES ItemSupplier(supplier_id),
-  FOREIGN KEY (item_id) REFERENCES InventoryItem(item_id)
+-- Creación de la tabla Inventario
+CREATE TABLE Inventario (
+  ID_Inventario INT PRIMARY KEY,
+  ID_Unidad INT,
+  ID_Producto INT,
+  Cantidad INT,
+  FOREIGN KEY (ID_Unidad) REFERENCES Unidades_Educativas(ID_Unidad),
+  FOREIGN KEY (ID_Producto) REFERENCES Productos(ID_Producto)
 );
 
--- Insert a random record into the SupplierItem table
-INSERT INTO SupplierItem (supplier_id, item_id, price, quantity_available)
-VALUES (1, 1, 10.99, 5);
+-- Inserción de datos aleatorios en la tabla Inventario
+INSERT INTO Inventario (ID_Inventario, ID_Unidad, ID_Producto, Cantidad)
+VALUES (1, 1, 1, 10),
+       (2, 2, 2, 20),
+       (3, 3, 3, 30);
 
--- Create the Employee table
-CREATE TABLE Employee (
-  employee_id INT PRIMARY KEY,
-  employee_name VARCHAR(100),
-  position VARCHAR(100),
-  contact_information VARCHAR(255)
+-- Creación de la tabla Productos
+CREATE TABLE Productos (
+  ID_Producto INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Descripcion VARCHAR(255)
 );
 
--- Insert a random record into the Employee table
-INSERT INTO Employee (employee_id, employee_name, position, contact_information)
-VALUES (1, 'John Doe', 'Manager', 'john.doe@example.com');
+-- Inserción de datos aleatorios en la tabla Productos
+INSERT INTO Productos (ID_Producto, Nombre, Descripcion)
+VALUES (1, 'Producto 1', 'Descripción 1'),
+       (2, 'Producto 2', 'Descripción 2'),
+       (3, 'Producto 3', 'Descripción 3');
 
--- Create the CenterEmployee table
-CREATE TABLE CenterEmployee (
-  center_id INT,
-  employee_id INT,
-  FOREIGN KEY (center_id) REFERENCES EducationalCenter(center_id),
-  FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+-- Creación de la tabla Proveedores
+CREATE TABLE Proveedores (
+  ID_Proveedor INT PRIMARY KEY,
+  Nombre VARCHAR(255),
+  Direccion VARCHAR(255)
 );
 
--- Insert a random record into the CenterEmployee table
-INSERT INTO CenterEmployee (center_id, employee_id)
-VALUES (1, 1);
+-- Inserción de datos aleatorios en la tabla Proveedores
+INSERT INTO Proveedores (ID_Proveedor, Nombre, Direccion)
+VALUES (1, 'Proveedor 1', 'Dirección 1'),
+       (2, 'Proveedor 2', 'Dirección 2'),
+       (3, 'Proveedor 3', 'Dirección 3');
 
--- Create the CenterCoordinates table
-CREATE TABLE CenterCoordinates (
-  center_id INT PRIMARY KEY,
-  latitude DECIMAL(9, 6),
-  longitude DECIMAL(9, 6),
-  FOREIGN KEY (center_id) REFERENCES EducationalCenter(center_id)
+-- Creación de la tabla Suministro
+CREATE TABLE Suministro (
+  ID_Suministro INT PRIMARY KEY,
+  ID_Proveedor INT,
+  ID_Producto INT,
+  ID_Unidad INT,
+  Cantidad INT,
+  FOREIGN KEY (ID_Proveedor) REFERENCES Proveedores(ID_Proveedor),
+  FOREIGN KEY (ID_Producto) REFERENCES Productos(ID_Producto),
+  FOREIGN KEY (ID_Unidad) REFERENCES Unidades_Educativas(ID_Unidad)
 );
 
--- Insert a random record into the CenterCoordinates table
-INSERT INTO CenterCoordinates (center_id, latitude, longitude)
-VALUES (1, 40.7128, -74.0060);
+-- Inserción de datos aleatorios en la tabla Suministro
+INSERT INTO Suministro (ID_Suministro, ID_Proveedor, ID_Producto, ID_Unidad, Cantidad)
+VALUES (1, 1, 1, 1, 5),
+       (2, 2, 2, 2, 10),
+       (3, 3, 3, 3, 15);
