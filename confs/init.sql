@@ -63,7 +63,7 @@ CREATE TABLE Unidades_Educativas (
   Direccion VARCHAR(255),
   ID_Tipo INT,
   ID_Localidad INT,
-  FOREIGN KEY (ID_Tipo) REFERENCES Tipos_Unidades(ID_Tipo)
+  FOREIGN KEY (ID_Tipo) REFERENCES Tipos_Unidades(ID_Tipo),
   FOREIGN KEY (ID_Localidad) REFERENCES Localidades(ID_Localidad)
 );
 
