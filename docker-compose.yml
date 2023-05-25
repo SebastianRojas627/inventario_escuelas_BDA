@@ -29,6 +29,7 @@ services:
     volumes:
       - mysqldata_slave:/var/lib/mysql
       - ./slave.cnf:/etc/my.cnf
+      - ./confs/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./confs/slave.sql:/docker-entrypoint-initdb.d/slave.sql
     environment:
       - MYSQL_ROOT_PASSWORD=password
