@@ -17,7 +17,7 @@ El Gobierno Autónomo Municipal de Tarija es la entidad encargada de la administ
 
 ## Diagrama propuesto de la Base de Datos
 
-![Database diagram](../Docker-Compose/diagram.png)
+![Database diagram](./image/diagram.png)
 
 ### Estructura de contenedores
 
