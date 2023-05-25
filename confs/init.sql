@@ -64,7 +64,7 @@ CREATE TABLE Unidades_Educativas (
   ID_Tipo INT,
   ID_Localidad INT,
   FOREIGN KEY (ID_Tipo) REFERENCES Tipos_Unidades(ID_Tipo)
-  FOREIGN KEY (ID_Localidad) REFERENCES Tipos_Unidades(ID_Localidad)
+  FOREIGN KEY (ID_Localidad) REFERENCES Localidades(ID_Localidad)
 );
 
 INSERT INTO Unidades_Educativas (ID_Unidad, Nombre, Direccion, ID_Tipo, ID_Localidad)
