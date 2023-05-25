@@ -1,8 +1,4 @@
 -- Switch to the newly created database
-CREATE USER "replication"@"%" IDENTIFIED BY "password";
-GRANT REPLICATION SLAVE ON *.* TO "replication"@"%";
-FLUSH PRIVILEGES;
-
 USE inventario_escuelas;
 
 -- Create the Region table
@@ -116,3 +112,7 @@ CREATE TABLE CenterCoordinates (
 -- Insert a random record into the CenterCoordinates table
 INSERT INTO CenterCoordinates (center_id, latitude, longitude)
 VALUES (1, 40.7128, -74.0060);
+
+CREATE USER "replication"@"%" IDENTIFIED BY "password";
+GRANT REPLICATION SLAVE ON *.* TO "replication"@"%";
+FLUSH PRIVILEGES;
