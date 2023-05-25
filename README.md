@@ -2,22 +2,13 @@
 
 En este repositorio se encuentra la documentación y código relacionado con el proyecto de base de datos destinado a gestionar el inventario de establecimientos educativos en la provincia de Cercado. El objetivo principal de este servicio es proporcionar una solución eficiente para mantener un registro preciso de los recursos y suministros de las unidades educativas, así como facilitar la gestión y seguimiento de los mismos.
 
-## Descripción del Proyecto
-
-El proyecto consiste en el desarrollo de un sistema informático geográfico y una base de datos para el inventario de establecimientos educativos en la provincia de Cercado. El sistema permitirá:
-
-- Registrar y gestionar información detallada de cada establecimiento educativo, incluyendo su ubicación geográfica mediante coordenadas GPS.
-- Realizar un seguimiento del inventario de recursos y suministros en cada establecimiento educativo.
-- Establecer relaciones entre proveedores y productos suministrados a los establecimientos educativos.
-- Generar informes y estadísticas sobre el estado del inventario y la distribución de recursos.
-
 ### Gobierno Autónomo Municipal de Tarija
 
 El Gobierno Autónomo Municipal de Tarija es la entidad encargada de la administración y gestión de los asuntos locales en el municipio de Tarija. Su objetivo es brindar servicios eficientes y mejorar la calidad de vida de los ciudadanos a través de diferentes iniciativas y proyectos.
 
 ### Requerimientos del Proyecto
 
-- Diseño de la Base de Datos: Se utilizó el sistema de gestión de bases de datos MySQL para la implementación de la base de datos.
+- Diseño de una base de datos para el registro de inventario y ubicación geografica de unidades educativas presentes en la provincia de Cercado
 - Tablas y Columnas: Se crearon 8 tablas principales, cada una con al menos 3 columnas para almacenar información relevante.
 - Relaciones entre Tablas: Se establecieron relaciones entre las tablas mediante claves primarias y claves foráneas para garantizar la integridad referencial y la consistencia de los datos.
 - Creacion de un contenedor mysql que albergue la base de datos
@@ -26,7 +17,7 @@ El Gobierno Autónomo Municipal de Tarija es la entidad encargada de la administ
 
 ## Diagrama propuesto de la Base de Datos
 
-Imagen
+![Database diagram](../Docker-Compose/diagram.png)
 
 ### Estructura de contenedores
 

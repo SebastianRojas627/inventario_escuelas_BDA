@@ -62,13 +62,15 @@ CREATE TABLE Unidades_Educativas (
   Nombre VARCHAR(255),
   Direccion VARCHAR(255),
   ID_Tipo INT,
+  ID_Localidad INT,
   FOREIGN KEY (ID_Tipo) REFERENCES Tipos_Unidades(ID_Tipo)
+  FOREIGN KEY (ID_Localidad) REFERENCES Tipos_Unidades(ID_Localidad)
 );
 
-INSERT INTO Unidades_Educativas (ID_Unidad, Nombre, Direccion, ID_Tipo)
-VALUES (1, 'Unidad Educativa A', 'Dirección A', 1),
-       (2, 'Unidad Educativa B', 'Dirección B', 1),
-       (3, 'Unidad Educativa C', 'Dirección C', 2);
+INSERT INTO Unidades_Educativas (ID_Unidad, Nombre, Direccion, ID_Tipo, ID_Localidad)
+VALUES (1, 'Unidad Educativa A', 'Dirección A', 1, 1),
+       (2, 'Unidad Educativa B', 'Dirección B', 1, 2),
+       (3, 'Unidad Educativa C', 'Dirección C', 2, 3);
 
 CREATE TABLE Coordenadas_GPS (
   ID_Coordenadas INT PRIMARY KEY,
